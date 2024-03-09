@@ -1,21 +1,13 @@
-import TimerDisplay from "../components/Timer/TimerDisplay";
-import TimerControls from "../components/Timer/TimerControls";
-import { FaSpotify } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import TimerRing from "../components/Timer/TimerRing";
+import SpotyBtn from "../components/Timer/SpotyBtn";
 
 function TimerPage() {
   return (
-    <div className='section'>
-      <TimerDisplay />
-      <TimerControls />
-
-      <a
-        href='https://open.spotify.com/'
-        target='_blank'
-        className='absolute top-[0] right-[0] m-4 p-[0.2rem] rounded-[10px] text-[2rem] bg-[black] text-[#1db954]'
-      >
-        <FaSpotify />
-      </a>
+    <div
+      className={`flex items-center justify-center flex-col gap-8 h-full p-4 pt-40 bg-[rgb(255,_255,_255)] bg-[url("../public/icons/timer-background.png")] bg-cover bg-bottom`}
+    >
+      <TimerRing></TimerRing>
+      <SpotyBtn></SpotyBtn>
     </div>
   );
 }

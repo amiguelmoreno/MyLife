@@ -3,8 +3,10 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 const TimerContext = createContext();
 
 const initialState = {
-  time: 0,
+  key: 0,
+  time: 3601,
   isRunning: false,
+  initialTime: 3601,
 };
 
 const timerReducer = (state, action) => {
@@ -14,9 +16,14 @@ const timerReducer = (state, action) => {
     case "STOP":
       return { ...state, isRunning: false };
     case "RESET":
-      return { ...state, time: 0, isRunning: false };
+      return {
+        ...state,
+        time: state.initialTime,
+        isRunning: false,
+        key: state.key + 1,
+      };
     case "TICK":
-      return { ...state, time: state.time + 1 };
+      return { ...state, time: state.time - 0.2 };
     default:
       return state;
   }
@@ -24,12 +31,18 @@ const timerReducer = (state, action) => {
 
 export const TimerProvider = ({ children }) => {
   const storedState =
-    JSON.parse(localStorage.getItem("timerState")) || initialState;
+    /* JSON.parse(localStorage.getItem("timerState")) || */ initialState;
   const [state, dispatch] = useReducer(timerReducer, storedState);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     localStorage.setItem("timerState", JSON.stringify(state));
-  }, [state]);
+  }, [state]); */
+
+  useEffect(() => {
+    if (state.time <= 0) {
+      dispatch({ type: "RESET" });
+    }
+  }, [state.time]);
 
   useEffect(() => {
     let interval;
@@ -37,7 +50,7 @@ export const TimerProvider = ({ children }) => {
     if (state.isRunning) {
       interval = setInterval(() => {
         dispatch({ type: "TICK" });
-      }, 1000);
+      }, 200);
     }
 
     return () => clearInterval(interval);
