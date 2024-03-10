@@ -1,5 +1,15 @@
+import TimerDisplayTime from "../components/Timer/TimerDisplayTime";
+import { useTimer } from "../contexts/timerContext";
+
 function CalendarPage() {
-  return <div>Calendar</div>;
+  const { state } = useTimer();
+
+  return (
+    <div>
+      Calendar
+      {<TimerDisplayTime size='small'></TimerDisplayTime>}
+    </div>
+  );
 }
 
 export default CalendarPage;

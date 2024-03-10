@@ -1,12 +1,16 @@
 import RoutineForm from "../components/Routine/RoutineForm";
 import RoutineHabits from "../components/Routine/RoutineHabits";
+import TimerDisplayTime from "../components/Timer/TimerDisplayTime";
 
 function RoutinePage() {
   return (
-    <div className='section'>
-      <h1 className='dayroutine'>Wednesday 3 February</h1>
+    <div className='p-4 pb-20'>
+      <h1 className='text-center font-medium text-[1.8rem]'>
+        Wednesday 3 February
+      </h1>
       <RoutineHabits></RoutineHabits>
-      <RoutineForm></RoutineForm>
+      <RoutineForm></RoutineForm>{" "}
+      {<TimerDisplayTime size='small'></TimerDisplayTime>}
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 
+const alarmSound = new Audio("audio/alarm.mp3");
+
 const TimerContext = createContext();
 
 const initialState = {
-  key: 0,
-  time: 3601,
+  time: 5,
   isRunning: false,
-  initialTime: 3601,
+  initialTime: 5,
 };
 
 const timerReducer = (state, action) => {
@@ -20,10 +21,15 @@ const timerReducer = (state, action) => {
         ...state,
         time: state.initialTime,
         isRunning: false,
-        key: state.key + 1,
       };
     case "TICK":
-      return { ...state, time: state.time - 0.2 };
+      return { ...state, time: state.time - 1 };
+    case "UPDATETIME":
+      return {
+        ...state,
+        time: action.payload.timeToAdd,
+        initialTime: action.payload.timeToAdd,
+      };
     default:
       return state;
   }
@@ -31,16 +37,20 @@ const timerReducer = (state, action) => {
 
 export const TimerProvider = ({ children }) => {
   const storedState =
-    /* JSON.parse(localStorage.getItem("timerState")) || */ initialState;
+    JSON.parse(localStorage.getItem("timerState")) || initialState;
   const [state, dispatch] = useReducer(timerReducer, storedState);
 
-  /*   useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("timerState", JSON.stringify(state));
-  }, [state]); */
+  }, [state]);
 
   useEffect(() => {
     if (state.time <= 0) {
-      dispatch({ type: "RESET" });
+      dispatch({ type: "STOP" });
+      alarmSound.play();
+      setTimeout(() => {
+        alarmSound.pause();
+      }, 5000);
     }
   }, [state.time]);
 
@@ -50,7 +60,7 @@ export const TimerProvider = ({ children }) => {
     if (state.isRunning) {
       interval = setInterval(() => {
         dispatch({ type: "TICK" });
-      }, 200);
+      }, 1000);
     }
 
     return () => clearInterval(interval);
