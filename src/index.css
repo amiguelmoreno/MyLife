@@ -39,6 +39,9 @@ nav a.active {
 
 .overlay {
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 99;
   top: 0;
   left: 0;
@@ -48,5 +51,38 @@ nav a.active {
   backdrop-filter: blur(5px);
 }
 
-.toolbarbtn {
+.habitlist {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 10px;
+  height: 50rem;
+  overflow: scroll;
+  width: 90%;
+  max-width: 40rem;
+}
+
+.habit {
+  display: flex;
+  background-color: turquoise;
+  padding: 0.6rem 1rem;
+  align-items: center;
+  border-radius: 5px;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.buttonslist {
+  display: flex;
+  gap: 1rem;
+
+  button {
+    padding: 0.4rem;
+    border-radius: 5px;
+    color: black;
+    background-color: white;
+  }
 }

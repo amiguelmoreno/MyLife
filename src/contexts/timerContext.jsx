@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import formatedTime from "../utils/formatedTime";
 
 const alarmSound = new Audio("audio/alarm.mp3");
 
@@ -43,6 +44,12 @@ export const TimerProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("timerState", JSON.stringify(state));
   }, [state]);
+
+  useEffect(() => {
+    if (state.isRunning)
+      document.title = `ProduApp - ${formatedTime(state.time)}`;
+    else document.title = `ProduApp`;
+  }, [state.time]);
 
   useEffect(() => {
     if (state.time <= 0) {

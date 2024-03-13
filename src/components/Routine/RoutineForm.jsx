@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { useTasks } from "../../contexts/routineContext";
 
-function RoutineForm({ isFormVisible, setIsFormVisible }) {
-  const { tasks, addTask } = useTasks();
+function RoutineForm({ isFormVisible, setIsFormVisible, taskId }) {
+  const { tasks, addTask, setTasks } = useTasks();
   const { register, handleSubmit, formState, reset } = useForm();
-  const { errors } = formState;
-  const [subtasksCnt, setSubtasksCnt] = useState(0);
+  const [editTask, setEditTask] = useState(
+    tasks.filter((task) => task.id === taskId)[0]
+  );
+  const [subtasksCnt, setSubtasksCnt] = useState(editTask.subtasks.length || 0);
   const MAX_SUBTASKS = 8;
 
   function addSubtask() {
@@ -22,12 +24,19 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
       className='bg-white border-2 border-solid border-gray-300 rounded-5 px-2 py-0 w-full rounded-[5px]'
       type='text'
       name='habitSubtasks'
+      defaultValue={editTask.subtasks[index]}
       id={`subtask${index}`}
+      maxLength={30}
       {...register(`subtask${index}`)}
     />
   ));
 
   const onSubmit = (data) => {
+    if (taskId) {
+      const popedIdTasks = tasks.filter((task) => task.id !== taskId);
+      setTasks(popedIdTasks);
+    }
+
     if (
       !data.monday &&
       !data.tuesday &&
@@ -62,11 +71,11 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
       hour: data.habitHour,
       days: daysFiltered,
       subtasks: habitSubtasks,
-      id: uuidv4(),
+      id: editTask.id || uuidv4(),
       done: false,
     };
 
-    addTask(newTask);
+    setTasks((prevTasks) => [...prevTasks, newTask]);
     setSubtasksCnt(0);
     reset();
     setIsFormVisible((prev) => !prev);
@@ -92,6 +101,8 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                 type='text'
                 name='habitTitle'
                 id='habitTitle'
+                defaultValue={editTask?.title}
+                maxLength={30}
                 {...register("habitTitle", {
                   required: "Este campo es obligatorio",
                 })}
@@ -102,7 +113,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
               <input
                 className='bg-[#f0f0f0] border-[2px] border-[solid] border-[#ccc] rounded-[5px] cursor-pointer focus:border-[rgb(0,_149,_255)]'
                 type='color'
-                defaultValue='#323232'
+                defaultValue={editTask?.color || "#323232"}
                 name='habitColor'
                 id='habitColor'
                 {...register("habitColor")}
@@ -113,6 +124,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
               <input
                 className='bg-[white] border-[2px] border-[solid] border-[#ccc] rounded-[5px] cursor-pointer pl-[0.4rem]'
                 type='time'
+                defaultValue={editTask?.hour}
                 name='habitHour'
                 id='habitHour'
                 {...register("habitHour")}
@@ -126,6 +138,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                     className='appearance-none w-[25px] h-[25px] border-[2px] border-[solid] border-[#ccc] bg-[#fff] cursor-pointer rounded-[5px] checked:bg-blue-500 checked:border-blue-700 checked:text-white'
                     type='checkbox'
                     name='day'
+                    defaultChecked={editTask?.days.includes("monday")}
                     value='monday'
                     id='monday'
                     {...register("monday")}
@@ -139,6 +152,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                     className='appearance-none w-[25px] h-[25px] border-[2px] border-[solid] border-[#ccc] bg-[#fff] cursor-pointer rounded-[5px] checked:bg-blue-500 checked:border-blue-700 checked:text-white'
                     type='checkbox'
                     name='day'
+                    defaultChecked={editTask?.days.includes("tuesday")}
                     value='tuesday'
                     id='tuesday'
                     {...register("tuesday")}
@@ -152,6 +166,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                     className='appearance-none w-[25px] h-[25px] border-[2px] border-[solid] border-[#ccc] bg-[#fff] cursor-pointer rounded-[5px] checked:bg-blue-500 checked:border-blue-700 checked:text-white'
                     type='checkbox'
                     name='day'
+                    defaultChecked={editTask?.days.includes("wednesday")}
                     value='wednesday'
                     id='wednesday'
                     {...register("wednesday")}
@@ -165,6 +180,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                     className='appearance-none w-[25px] h-[25px] border-[2px] border-[solid] border-[#ccc] bg-[#fff] cursor-pointer rounded-[5px] checked:bg-blue-500 checked:border-blue-700 checked:text-white'
                     type='checkbox'
                     name='day'
+                    defaultChecked={editTask?.days.includes("thursday")}
                     value='thursday'
                     id='thursday'
                     {...register("thursday")}
@@ -178,6 +194,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                     className='appearance-none w-[25px] h-[25px] border-[2px] border-[solid] border-[#ccc] bg-[#fff] cursor-pointer rounded-[5px] checked:bg-blue-500 checked:border-blue-700 checked:text-white'
                     type='checkbox'
                     name='day'
+                    defaultChecked={editTask?.days.includes("friday")}
                     value='friday'
                     id='friday'
                     {...register("friday")}
@@ -191,6 +208,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                     className='appearance-none w-[25px] h-[25px] border-[2px] border-[solid] border-[#ccc] bg-[#fff] cursor-pointer rounded-[5px] checked:bg-blue-500 checked:border-blue-700 checked:text-white'
                     type='checkbox'
                     name='day'
+                    defaultChecked={editTask?.days.includes("saturday")}
                     value='saturday'
                     id='saturday'
                     {...register("saturday")}
@@ -204,6 +222,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                     className='appearance-none w-[25px] h-[25px] border-[2px] border-[solid] border-[#ccc] bg-[#fff] cursor-pointer rounded-[5px] checked:bg-blue-500 checked:border-blue-700 checked:text-white'
                     type='checkbox'
                     name='day'
+                    defaultChecked={editTask?.days.includes("sunday")}
                     value='sunday'
                     id='sunday'
                     {...register("sunday")}
@@ -243,7 +262,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible }) {
                 onClick={handleSubmit(onSubmit)}
                 disabled={formState.isSubmitting}
               >
-                Save
+                {taskId ? "Save" : "Add"}
               </button>
             </div>
           </form>

@@ -1,70 +1,59 @@
 import { useForm } from "react-hook-form";
 import { useFormTimerContext } from "../../contexts/useFormTimerContext";
 import { useTimer } from "../../contexts/timerContext";
+import { useEffect, useState } from "react";
+import secondtoHMS from "../../utils/secondToHMS.js";
+import TimerControls from "./TimerControls.jsx";
+import formatedTime from "../../utils/formatedTime.js";
 
 const TimerForm = () => {
   const { state } = useTimer();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useFormTimerContext();
 
-  function convertirSegundosAHMS(segundos = state.initialTime) {
-    if (segundos < 0) {
-      throw new Error("El tiempo en segundos no puede ser negativo.");
-    }
-
-    const horas = Math.floor(segundos / 3600);
-    const minutos = Math.floor((segundos % 3600) / 60);
-    const segundosRestantes = segundos % 60;
-
-    const formatearNumero = (numero) => (numero < 10 ? `0${numero}` : numero);
-
-    return {
-      horas: formatearNumero(horas),
-      minutos: formatearNumero(minutos),
-      segundos: formatearNumero(segundosRestantes),
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+      }
     };
-  }
 
-  const { register, handleSubmit, setValue, formState, errors } =
-    useFormTimerContext();
+    document.addEventListener("keypress", handleKeyPress);
 
-  const handleInputChange = (e) => {
-    setValue(e.target.id, e.target.value);
-  };
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+    return () => {
+      document.removeEventListener("keypress", handleKeyPress);
+    };
+  }, []);
 
   return (
     <div>
-      <form
-        className='flex items-center gap-4 pl-4'
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className='flex items-center gap-4 pl-4' onSubmit={handleSubmit}>
+        <button type='submit'></button>
         <div className='w-20 flex flex-col items-center'>
           <label className='pr-[0.8rem]'>hr</label>
           <input
             className='appearance-none text-[3.2rem] font-medium text-center w-24'
-            id='hour'
             type='number'
             placeholder='00'
-            defaultValue={convertirSegundosAHMS().horas}
-            onChange={handleInputChange}
+            defaultValue={secondtoHMS(state.initialTime).hours}
             {...register("hour", {
               max: 99,
               min: 0,
             })}
           />
+          {errors && <p>{errors?.hours?.message}</p>}
         </div>
         <p className='text-[3.2rem] self-end pb-[0.2rem] pr-2'>:</p>
         <div className='w-20 flex flex-col items-center'>
           <label className='pr-[0.8rem]'>min</label>
           <input
             className='appearance-none text-[3.2rem] font-medium text-center w-24'
-            id='minutes'
             type='number'
             placeholder='00'
-            defaultValue={convertirSegundosAHMS().minutos}
-            onChange={handleInputChange}
+            defaultValue={secondtoHMS(state.initialTime).minutes}
             {...register("minutes", {
               max: {
                 value: 59,
@@ -76,19 +65,19 @@ const TimerForm = () => {
               },
             })}
           />
+          {errors && <p>{errors?.minutes?.message}</p>}
         </div>
         <p className='text-[3.2rem] self-end pb-[0.2rem] pr-2'>:</p>
         <div className='w-20 flex flex-col items-center'>
           <label className='pr-[0.8rem]'>sec</label>
           <input
             className='appearance-none text-[3.2rem] font-medium text-center w-24'
-            id='seconds'
             type='number'
             placeholder='00'
-            defaultValue={convertirSegundosAHMS().segundos}
-            onChange={handleInputChange}
+            defaultValue={secondtoHMS(state.initialTime).seconds}
             {...register("seconds", { max: 59, min: 0 })}
           />
+          {errors && <p>{errors?.seconds?.message}</p>}
         </div>
       </form>
     </div>

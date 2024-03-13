@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTimer } from "../../contexts/timerContext";
 import { useFormTimerContext } from "../../contexts/useFormTimerContext";
 
@@ -5,7 +6,7 @@ const TimerControls = () => {
   const { state, dispatch } = useTimer();
   const { handleSubmit } = useFormTimerContext();
 
-  const onSubmitOutside = (data) => {
+  const onSubmitData = (data) => {
     const hoursToSec = +data.hour * 3600;
     const minToSec = +data.minutes * 60;
 
@@ -57,7 +58,7 @@ const TimerControls = () => {
       )}
       {!state.isRunning && state.time === state.initialTime && (
         <button
-          onClick={handleSubmit(onSubmitOutside)}
+          onClick={handleSubmit(onSubmitData)}
           disabled={state.isRunning}
           className=' bg-[rgb(_0,_149,_255)] text-[white] px-4 py-[0.4rem] rounded-[5px] w-24 [transition:all_0.4s]'
         >

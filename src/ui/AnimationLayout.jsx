@@ -1,8 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import AppLayout from "./AppLayout";
-import Sidebar from "./Sidebar";
 import { motion } from "framer-motion";
-import MainContainer from "./MainContainer";
 
 const pageVariants = {
   initial: {
@@ -26,17 +24,15 @@ function AnimationLayout() {
   const { pathname } = useLocation();
   return (
     <AppLayout>
-      <MainContainer>
-        <motion.div
-          key={pathname}
-          initial='initial'
-          animate='in'
-          variants={pageVariants}
-          transition={pageTransition}
-        >
-          <Outlet></Outlet>
-        </motion.div>
-      </MainContainer>
+      <motion.div
+        key={pathname}
+        initial='initial'
+        animate='in'
+        variants={pageVariants}
+        transition={pageTransition}
+      >
+        <Outlet></Outlet>
+      </motion.div>
     </AppLayout>
   );
 }

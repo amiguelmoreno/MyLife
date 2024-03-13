@@ -15,7 +15,7 @@ function RoutineHabit({ task }) {
   return (
     <article
       style={{ backgroundColor: `rgba(${convertColorToRgb(color)}, 0.4)` }} // tw does not accept dinamic variables
-      className={`relative flex flex-col gap-2 p-2 rounded-[10px] ${
+      className={`w-[90vw] max-w-[40rem] relative flex flex-col gap-2 p-2 rounded-[10px] ${
         isChecked && "opacity-60"
       }`}
     >
