@@ -1,14 +1,10 @@
-import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import MainContainer from "./MainContainer";
 
-function AppLayout() {
+function AppLayout({ children }) {
   return (
     <div className='h-screen relative'>
       <Sidebar></Sidebar>
-      <MainContainer>
-        <Outlet></Outlet>
-      </MainContainer>
+      {children}
     </div>
   );
 }

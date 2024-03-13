@@ -8,7 +8,7 @@ import { FormTimerProvider } from "../contexts/useFormTimerContext";
 function TimerPage() {
   return (
     <div
-      className={`flex items-center justify-center flex-col gap-8 h-full p-4 pt-40 bg-[rgb(255,_255,_255)] bg-[url("/icons/timer-background.png")] bg-cover bg-bottom`}
+      className={`flex items-center justify-center flex-col gap-8 h-[100vh] p-4 pt-40 bg-[rgb(255,_255,_255)] bg-[url("/icons/timer-background.png")] bg-cover bg-bottom`}
     >
       <FormTimerProvider>
         <TimerDisplay></TimerDisplay>
