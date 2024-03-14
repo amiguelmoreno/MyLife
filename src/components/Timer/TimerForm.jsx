@@ -27,7 +27,7 @@ const TimerForm = () => {
 
   return (
     <div>
-      <form className='flex items-center gap-1 pl-4' onSubmit={handleSubmit}>
+      <form className='flex items-center pl-0 lg:pl-4' onSubmit={handleSubmit}>
         <button type='submit'></button>
         <div className='w-20 flex flex-col items-center'>
           <label className='pr-[0.8rem]'>hr</label>
