@@ -2,7 +2,7 @@ import { useState } from "react";
 import RoutineForm from "../components/Routine/RoutineForm";
 import RoutineHabits from "../components/Routine/RoutineHabits";
 import TimerDisplayTime from "../components/Timer/TimerDisplayTime";
-import { TaskProvider, useTasks } from "../contexts/routineContext";
+import { useTasks } from "../contexts/routineContext";
 import AddButton from "../ui/AddButton";
 import Toolbar from "../ui/Toolbar";
 import { formatDate } from "../utils/dates";
@@ -35,7 +35,6 @@ function RoutinePage() {
       {tasks.length > 0 && (
         <Toolbar type='routine' setEditVisible={setEditVisible}></Toolbar>
       )}
-
       {(state.isRunning || state.time !== state.initialTime) && (
         <TimerDisplayTime size='small'></TimerDisplayTime>
       )}

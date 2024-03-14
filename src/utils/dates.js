@@ -49,3 +49,14 @@ export function formatDate() {
 
   return formattedDate;
 }
+
+export function generateRandomHour() {
+  const hour = Math.floor(Math.random() * 24); // Genera un número aleatorio entre 0 y 23
+  const minute = Math.floor(Math.random() * 60); // Genera un número aleatorio entre 0 y 59
+
+  // Formatea la hora y el minuto con ceros a la izquierda si es necesario
+  const formattedHour = hour < 10 ? `0${hour}` : `${hour}`;
+  const formattedMinute = minute < 10 ? `0${minute}` : `${minute}`;
+
+  return `${formattedHour}:${formattedMinute}`;
+}

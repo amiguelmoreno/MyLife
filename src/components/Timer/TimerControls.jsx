@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTimer } from "../../contexts/timerContext";
 import { useFormTimerContext } from "../../contexts/useFormTimerContext";
 

@@ -1,4 +1,3 @@
-import TimerRing from "../components/Timer/TimerDisplay";
 import SpotyBtn from "../components/Timer/SpotyBtn";
 import TimerControls from "../components/Timer/TimerControls";
 import TimerDisplay from "../components/Timer/TimerDisplay";

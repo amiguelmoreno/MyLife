@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { useTasks } from "../../contexts/routineContext";
 
 function RoutineForm({ isFormVisible, setIsFormVisible, taskId }) {
-  const { tasks, addTask, setTasks } = useTasks();
+  const { tasks, setTasks } = useTasks();
   const { register, handleSubmit, formState, reset } = useForm();
-  const [editTask, setEditTask] = useState(
-    tasks.filter((task) => task.id === taskId)[0]
+  const [editTask] = useState(tasks.filter((task) => task.id === taskId)[0]);
+  const [subtasksCnt, setSubtasksCnt] = useState(
+    editTask?.subtasks.length || 0
   );
-  const [subtasksCnt, setSubtasksCnt] = useState(editTask.subtasks.length || 0);
   const MAX_SUBTASKS = 8;
 
   function addSubtask() {
@@ -24,7 +24,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible, taskId }) {
       className='bg-white border-2 border-solid border-gray-300 rounded-5 px-2 py-0 w-full rounded-[5px]'
       type='text'
       name='habitSubtasks'
-      defaultValue={editTask.subtasks[index]}
+      defaultValue={editTask?.subtasks[index]}
       id={`subtask${index}`}
       maxLength={30}
       {...register(`subtask${index}`)}
@@ -71,8 +71,7 @@ function RoutineForm({ isFormVisible, setIsFormVisible, taskId }) {
       hour: data.habitHour,
       days: daysFiltered,
       subtasks: habitSubtasks,
-      id: editTask.id || uuidv4(),
-      done: false,
+      id: editTask?.id || uuidv4(),
     };
 
     setTasks((prevTasks) => [...prevTasks, newTask]);
@@ -81,17 +80,19 @@ function RoutineForm({ isFormVisible, setIsFormVisible, taskId }) {
     setIsFormVisible((prev) => !prev);
     console.log(tasks);
   };
-  //console.log(errors);
 
   function handleOverayClick(e) {
     if (e.target.id !== "overlay") return;
-
     setIsFormVisible((prev) => !prev);
   }
 
   return (
     isFormVisible && (
-      <div className='overlay' id='overlay' onClick={handleOverayClick}>
+      <div
+        className='fixed flex items-center justify-center top-[0] left-[0] w-full h-screen bg-[rgba(155,_155,_155,_0.583)] backdrop-filter backdrop-blur-[5px] z-[150]'
+        id='overlay'
+        onClick={handleOverayClick}
+      >
         <div className='bg-[white] border-[3px] border-[solid] border-[#ccc] rounded-[5px] top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 absolute p-4'>
           <form className='flex flex-col gap-4' action=''>
             <div className='flex items-center gap-4'>

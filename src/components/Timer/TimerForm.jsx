@@ -1,10 +1,7 @@
-import { useForm } from "react-hook-form";
 import { useFormTimerContext } from "../../contexts/useFormTimerContext";
 import { useTimer } from "../../contexts/timerContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import secondtoHMS from "../../utils/secondToHMS.js";
-import TimerControls from "./TimerControls.jsx";
-import formatedTime from "../../utils/formatedTime.js";
 
 const TimerForm = () => {
   const { state } = useTimer();

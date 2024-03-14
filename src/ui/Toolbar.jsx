@@ -1,5 +1,3 @@
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-
 function Toolbar({ type, setEditVisible }) {
   function handleVisible() {
     setEditVisible((prev) => !prev);

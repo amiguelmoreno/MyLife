@@ -1,7 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { IoIosTimer } from "react-icons/io";
-import { MdOutlineTaskAlt } from "react-icons/md";
-import { IoCalendarOutline } from "react-icons/io5";
 import { LuAlarmClock } from "react-icons/lu";
 
 function Sidebar() {
