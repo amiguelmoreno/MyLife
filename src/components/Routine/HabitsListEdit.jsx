@@ -33,7 +33,7 @@ function HabitsListEdit({ isEditVisible, setEditVisible }) {
           className='fixed flex items-center justify-center top-[0] left-[0] w-full h-screen bg-[rgba(155,_155,_155,_0.583)] backdrop-filter backdrop-blur-[5px] z-[150]'
           onClick={handleOverlayClick}
         >
-          <div className='bg-[white] flex flex-col gap-[0.8rem] p-4 rounded-[10px] h-[50rem] overflow-scroll w-[90%] max-w-[40rem] '>
+          <div className='bg-[white] flex flex-col gap-[0.8rem] p-4 rounded-[10px] h-[30rem] overflow-scroll w-[90%] max-w-[40rem] '>
             {tasks.map((task) => (
               <div
                 key={task.id}
