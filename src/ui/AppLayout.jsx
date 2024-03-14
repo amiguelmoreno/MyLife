@@ -2,7 +2,7 @@ import Sidebar from "./Sidebar";
 
 function AppLayout({ children }) {
   return (
-    <div className='s'>
+    <div>
       <Sidebar></Sidebar>
       {children}
     </div>
