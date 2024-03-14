@@ -2,7 +2,7 @@ import Sidebar from "./Sidebar";
 
 function AppLayout({ children }) {
   return (
-    <div className='h-screen relative'>
+    <div className='s'>
       <Sidebar></Sidebar>
       {children}
     </div>

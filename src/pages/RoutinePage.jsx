@@ -16,7 +16,7 @@ function RoutinePage() {
   const [isEditVisible, setEditVisible] = useState();
 
   return (
-    <div className='pt-8 px-[0.8rem] pb-28'>
+    <div className='pt-8 px-[0.8rem] pb-28 h-[100%]'>
       <h1 className='text-center font-medium text-[1.8rem]'>{formatDate()}</h1>
       <RoutineHabits></RoutineHabits>
       {tasks.length > 0 && (
