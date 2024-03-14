@@ -7,14 +7,18 @@ import { FormTimerProvider } from "../contexts/useFormTimerContext";
 function TimerPage() {
   return (
     <div
-      className={`relative flex items-center justify-center flex-col gap-8 h-[100vh] overflow-hidden p-4  bg-[rgb(255,_255,_255)] bg-[url("/icons/timer-background.png")] bg-cover bg-bottom`}
+      className={`relative flex items-center justify-center flex-col h-[100vh]  p-4  bg-[rgb(255,_255,_255)] bg-[url("/icons/timer-background.png")] bg-cover bg-bottom`}
     >
-      <FormTimerProvider>
-        <TimerDisplay></TimerDisplay>
-        <TimerControls></TimerControls>
-        <TimerQuotes></TimerQuotes>
-        <SpotyBtn></SpotyBtn>
-      </FormTimerProvider>
+      <div
+        className={`flex flex-col gap-8 justify-center overflow-hidden items-center`}
+      >
+        <FormTimerProvider>
+          <TimerDisplay></TimerDisplay>
+          <TimerControls></TimerControls>
+          <TimerQuotes></TimerQuotes>
+          <SpotyBtn></SpotyBtn>
+        </FormTimerProvider>
+      </div>
     </div>
   );
 }
