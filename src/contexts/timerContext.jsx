@@ -47,8 +47,8 @@ export const TimerProvider = ({ children }) => {
 
   useEffect(() => {
     if (state.isRunning)
-      document.title = `MyRoutine - ${formatedTime(state.time)}`;
-    else document.title = `MyRoutine`;
+      document.title = `RoutineApp - ${formatedTime(state.time)}`;
+    else document.title = `RoutineApp`;
   }, [state.time]);
 
   useEffect(() => {
