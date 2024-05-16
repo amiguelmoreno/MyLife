@@ -2,18 +2,18 @@
 <br />
 <div align="center">
   <a href="https://amiguelmoreno.github.io/MagicHome/">
-    <img src="img/logo.png" alt="Logo" width="180">
+    <img src="public/icons/favicon.png" alt="Logo" width="180">
   </a>
   <br />
   <br />
   <h1>Magic Home</h1>
   <br />
   <p align="center">
-    Full Responsive Landing Page build with <img src="https://img.shields.io/badge/-HTML5-orange" alt="Logo">,  <img src="https://img.shields.io/badge/-CSS3-blue" alt="Logo"> using <img src="https://img.shields.io/badge/-SASS-ff69b4" alt="Logo"> and <img src="https://img.shields.io/badge/-JS-yellow" alt="Logo">
+    This is an App with 2 main functionalities, an habits page that allows you to create and manage all the tasks you have and a timer to track how productive you are while doing the tasks.
      <br />
      <br />
   <a href="#">
-    <img src="https://skillicons.dev/icons?i=html,css,sass,js" />
+    <img src="https://skillicons.dev/icons?i=html,css,tailwind,js,react" />
   </a>
     <br />
     <br />
