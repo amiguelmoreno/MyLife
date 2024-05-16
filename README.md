@@ -71,7 +71,7 @@ Some features I would like to add are:
 
 [![LinkedIn][linkedin-shield]][linkedin-url] 
 
-Project Link: [https://magichome.netlify.app/](https://routinetimer.netlify.app/routine)
+Project Link: https://routinetimer.netlify.app/routine
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
