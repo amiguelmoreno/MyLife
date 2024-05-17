@@ -9,7 +9,7 @@
   <h1>Magic Home</h1>
   <br />
   <p align="center">
-    This is an App with 2 main functionalities, an habits page that allows you to create and manage all the tasks you have and a timer to track how productive you are while doing the tasks.
+    App to check your habits and timer to focus on your activities
      <br />
      <br />
   <a href="#">
