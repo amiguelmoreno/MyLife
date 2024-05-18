@@ -1,12 +1,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://amiguelmoreno.github.io/MagicHome/">
+  <a href="https://amiguelmoreno.github.io/RoutineApp/">
     <img src="public/icons/favicon.png" alt="Logo" width="180">
   </a>
   <br />
   <br />
-  <h1>Magic Home</h1>
+  <h1>Routine App</h1>
   <br />
   <p align="center">
     App to check your habits and timer to focus on your activities
