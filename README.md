@@ -44,7 +44,7 @@
 The main goal of this proyect was to do something I used on my daily basis and that is useful. This project have and habits page that allows you to create and manage all the tasks you have and a timer to track how productive you are while doing the tasks.
 <br />
 <br />
-### What did I used to get the best of this project?
+### What did I learn with this project?
 
   * Learn how to work with reusable components in React.
   * Use contexts to manage states and data inside the app.
